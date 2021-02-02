@@ -33,6 +33,18 @@ public class EdgeServer
 		cacheTypeInfo = new HashMap<>();
 	}
 
+	public int getEid() {
+		return id;
+	}
+
+	public float getLat() {
+		return lat;
+	}
+
+	public float getLon() {
+		return lon;
+	}
+
 	/**
 	 * get content from edge, if edge don't has it, edge will fetch from remote server and trigger the caching mechanism
 	 * may evict old ones
