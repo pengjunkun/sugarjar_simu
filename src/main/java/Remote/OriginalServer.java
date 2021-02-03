@@ -51,8 +51,7 @@ public class OriginalServer {
         //calculate the nearest one
         float minDistance = Integer.MAX_VALUE;
         int eid = -1;
-        //fixme: work pending here
-        for (EdgeServer edge : edges) {
+        for (EdgeServer edge : edges.values()) {
             float temp = calDistance(edge, lat, log);
             if (temp < minDistance) {
                 eid = edge.getEid();
@@ -80,7 +79,7 @@ public class OriginalServer {
 
         MyLog.initTagWriter("totalStatic");
 
-        for (EdgeServer edge : edges) {
+        for (EdgeServer edge : edges.values()) {
 //            return new long[] { totalRequest, hitRequest, missRequest };
             long[] tmp = edge.getRequestStat();
             double ratio = 0;

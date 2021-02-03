@@ -1,8 +1,8 @@
 Eid:1
-Total request:0
-Hit request:0
-Hit ratio:0.0
+Total request:4064621
+Hit request:837146
+Hit ratio:0.20595917798978058
 ----------------
 ----------------total----------------
-Total request:0
-Hit request:0
+Total request:4064621
+Hit request:837146

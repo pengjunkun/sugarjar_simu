@@ -41,7 +41,7 @@ public class SendController {
                     }
 
                 //3.send request
-                user.requestWitoutType(timestamp,vid);
+                user.requestWithoutType(timestamp,vid);
 
                 oneLine = bufferedReader.readLine();
             }
