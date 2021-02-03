@@ -11,7 +11,7 @@ import java.util.logging.*;
  */
 public class MyLog
 {
-	private static final String MYTAG = "JackTag";
+	private static String MYTAG = "JackTag";
 	public static Logger logger;
 	public static BufferedWriter tagWriter;
 
@@ -51,11 +51,12 @@ public class MyLog
 	//	}
 	//
 
-	public static void initTagWriter()
+	public static void initTagWriter(String str)
 	{
+		MYTAG=str;
 		try
 		{
-			tagWriter = new BufferedWriter(new FileWriter(MYTAG + ".csv"));
+			tagWriter = new BufferedWriter(new FileWriter("result/"+MYTAG + ".txt"));
 		} catch (IOException e)
 		{
 			e.printStackTrace();

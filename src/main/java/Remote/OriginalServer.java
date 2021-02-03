@@ -2,6 +2,7 @@ package Remote;
 
 import Edge.EdgeServer;
 import tools.MyConf;
+import tools.MyLog;
 import tools.MyTool;
 
 import java.util.ArrayList;
@@ -66,5 +67,36 @@ public class OriginalServer {
 
     public EdgeServer getEdge(int eid) {
         return edges.get(eid);
+    }
+
+    public long[] reportAllStat() {
+        long totalReq = 0;
+        long missReq = 0;
+        long hitReq = 0;
+        ArrayList<Double> edgeRatio = new ArrayList<>();
+
+        MyLog.initTagWriter("totalStatic");
+
+        for (EdgeServer edge : edges) {
+//            return new long[] { totalRequest, hitRequest, missRequest };
+            long[] tmp = edge.getRequestStat();
+            double ratio = 0;
+            if (tmp[0] != 0)
+                ratio = 1.0 * tmp[1] / tmp[0];
+            totalReq += tmp[0];
+            hitReq += tmp[1];
+            missReq += tmp[2];
+            edgeRatio.add(ratio);
+            MyLog.tagWriter("Eid:" + edge.getEid());
+            MyLog.tagWriter("Total request:" + tmp[0]);
+            MyLog.tagWriter("Hit request:" + tmp[1]);
+            MyLog.tagWriter("Hit ratio:" + ratio);
+            MyLog.tagWriter("----------------");
+        }
+        MyLog.tagWriter("----------------total----------------");
+        MyLog.tagWriter("Total request:" + totalReq);
+        MyLog.tagWriter("Hit request:" + hitReq);
+        MyLog.closeTagWriter();
+        return new long[]{totalReq, hitReq, missReq};
     }
 }

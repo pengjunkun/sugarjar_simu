@@ -1,0 +1,13 @@
+Eid:0
+Total request:17
+Hit request:7
+Hit ratio:0.4117647058823529
+----------------
+Eid:1
+Total request:0
+Hit request:0
+Hit ratio:0.0
+----------------
+----------------total----------------
+Total request:17
+Hit request:7
