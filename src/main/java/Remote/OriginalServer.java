@@ -6,6 +6,7 @@ import tools.MyLog;
 import tools.MyTool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by JackPeng(pengjunkun@gmail.com) on 2021/1/29.
@@ -14,7 +15,8 @@ import java.util.ArrayList;
  */
 public class OriginalServer {
     private static OriginalServer originalServer;
-    private static ArrayList<EdgeServer> edges = new ArrayList<>();
+    //<Eid,EdgeServer>
+    private static HashMap<Integer,EdgeServer> edges = new HashMap<>();
 
     //use singleton model
     private OriginalServer() {
@@ -28,7 +30,7 @@ public class OriginalServer {
             double lat = Double.parseDouble(edge[1]);
             double lon = Double.parseDouble(edge[2]);
             int size = Integer.parseInt(edge[3]);
-            edges.add(new EdgeServer(id, lat, lon, size));
+            edges.put(id,new EdgeServer(id, lat, lon, size));
         }
     }
 
@@ -49,6 +51,7 @@ public class OriginalServer {
         //calculate the nearest one
         float minDistance = Integer.MAX_VALUE;
         int eid = -1;
+        //fixme: work pending here
         for (EdgeServer edge : edges) {
             float temp = calDistance(edge, lat, log);
             if (temp < minDistance) {

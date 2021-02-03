@@ -1,4 +1,5 @@
 import Client.User;
+import Remote.OriginalServer;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,7 +25,7 @@ public class SendController {
                 long timestamp = Long.parseLong(tmp[1]);
                 double lon = Double.parseDouble(tmp[2]);
                 double lat = Double.parseDouble(tmp[3]);
-                //Todo: get the class in future
+                //Todo: get the type in future
                 int tid=0;
                 String vid = oneLine.split(",")[4];
 
@@ -40,7 +41,7 @@ public class SendController {
                     }
 
                 //3.send request
-                user.requestWithoutType(timestamp,vid);
+                user.requestWitoutType(timestamp,vid);
 
                 oneLine = bufferedReader.readLine();
             }
@@ -50,6 +51,8 @@ public class SendController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        OriginalServer.getInstance().reportAllStat();
 
     }
 }

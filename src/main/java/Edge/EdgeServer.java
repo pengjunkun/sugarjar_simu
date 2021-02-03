@@ -124,7 +124,7 @@ public class EdgeServer {
 
     }
 
-    public int getContentSize() {
+    public int getAllContentSize() {
         return lruCache.size();
     }
 }
