@@ -12,24 +12,30 @@ import java.util.HashMap;
  */
 public class EdgeChooser
 {
-	private HashMap<Integer,Integer> type2edge_hashMap;
-	public EdgeChooser(float lat,float log)
+	private HashMap<Integer,Integer> type2edgeId_hashMap;
+	private int defaultEdgeId=-1;
+	public EdgeChooser(double lat,double log)
 	{
-		type2edge_hashMap=new HashMap<>();
+		type2edgeId_hashMap=new HashMap<>();
 		addDefaultChoice(lat,log);
 	}
 
-	private void addDefaultChoice(float lat,float log)
+	private void addDefaultChoice(double lat,double log)
 	{
 		int defaultEdge= OriginalServer.getInstance().getDefaultEdge(lat,log);
+		this.defaultEdgeId=defaultEdge;
 		for (int type:MyConf.types)
 		{
-			type2edge_hashMap.put(type,defaultEdge);
+			type2edgeId_hashMap.put(type,defaultEdge);
 		}
 	}
 
 	public int getEdge(int tid)
 	{
-		return type2edge_hashMap.get(tid);
+		return type2edgeId_hashMap.get(tid);
+	}
+
+	public int getDefaultEdgeId() {
+		return defaultEdgeId;
 	}
 }

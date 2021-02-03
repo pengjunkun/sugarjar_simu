@@ -25,8 +25,8 @@ public class OriginalServer {
         edges.clear();
         for (String[] edge : MyConf.edgesInfo) {
             int id = Integer.parseInt(edge[0]);
-            float lat = Float.parseFloat(edge[1]);
-            float lon = Float.parseFloat(edge[2]);
+            double lat = Double.parseDouble(edge[1]);
+            double lon = Double.parseDouble(edge[2]);
             int size = Integer.parseInt(edge[3]);
             edges.add(new EdgeServer(id, lat, lon, size));
         }
@@ -44,7 +44,7 @@ public class OriginalServer {
         return 100;
     }
 
-    public int getDefaultEdge(float lat, float log) {
+    public int getDefaultEdge(double lat, double log) {
         //as all edges has been read above
         //calculate the nearest one
         float minDistance = Integer.MAX_VALUE;
@@ -59,7 +59,7 @@ public class OriginalServer {
         return eid;
     }
 
-    private float calDistance(EdgeServer edge, float lat, float log) {
+    private float calDistance(EdgeServer edge, double lat, double log) {
         //use lat and log to calculate the distance
         return (float) MyTool.distance(edge.getLat(), edge.getLon(), lat, log, "K");
 

@@ -54,4 +54,20 @@ public class EdgeServerTest
 		assertEquals(6,stat2[2]);
 
 	}
+
+	@Test
+	void testGetContentWithoutType(){
+		edgeServer.clear();
+		assertEquals(0,edgeServer.getContentSize());
+
+		assertEquals(MyConf.MISS_LATENCY, edgeServer.getContentWithoutType(0,  "1"));
+		assertEquals(MyConf.MISS_LATENCY, edgeServer.getContentWithoutType(0,  "2"));
+		assertEquals(MyConf.MISS_LATENCY, edgeServer.getContentWithoutType(0,  "3"));
+		assertEquals(MyConf.MISS_LATENCY, edgeServer.getContentWithoutType(0,  "4"));
+		assertEquals(MyConf.MISS_LATENCY, edgeServer.getContentWithoutType(0,  "5"));
+		assertEquals(5,edgeServer.getContentSize());
+		assertEquals(5,edgeServer.getCacheTypeInfo().get(MyConf.WITHOUT_TYPE));
+
+
+	}
 }

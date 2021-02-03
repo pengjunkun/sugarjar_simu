@@ -8,7 +8,7 @@ import java.util.Map;
  * <p>
  * used to store caching info <vid,tid>
  */
-public class LRUCache extends LinkedHashMap<Long, Integer>
+public class LRUCache extends LinkedHashMap<String, Integer>
 {
 	private int capacity;
 
@@ -22,11 +22,11 @@ public class LRUCache extends LinkedHashMap<Long, Integer>
 	 * use this to put in and get replaced video's type
 	 * @param vid
 	 * @param tid
-	 * @return the tid of replaced video(-1 means no replacement happened)
+	 * @return the tid of replaced video( NOT_REPLACEMENT means no replacement happened)
 	 */
-	public int putContentGetReplacedType(long vid, int tid)
+	public int putContentGetReplacedType(String vid, int tid)
 	{
-		int res = -1;
+		int res = MyConf.NOT_REPLACEMENT;
 		if (size() * MyConf.FILE_SIZE + MyConf.FILE_SIZE > capacity)
 		{
 			res = entrySet().iterator().next().getValue();

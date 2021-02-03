@@ -12,8 +12,14 @@ public class MyConf {
     public static final int MISS_LATENCY = 500;
     //MiB
     public static final int FILE_SIZE = 1;
-    public static int[] types = {0, 1, 2, 3, 4, 5, 6, 7};
+    //-1 means all in one type, without class info
+    public static int[] types = {-1,0, 1, 2, 3, 4, 5, 6, 7};
 
     //edges:{id,latitude,longitude,size(MiB)}
     public static String[][] edgesInfo = {{"0", "39.1", "116.1", "1000"}, {"1", "40.1", "116.1", "1005"}};
+
+
+    //define some special video type in Integer
+    public final static int NOT_REPLACEMENT=-101;
+    public final static int WITHOUT_TYPE=-102;
 }
