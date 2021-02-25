@@ -47,4 +47,8 @@ public class EdgeChooser
 	{
 		return defaultEdgeId;
 	}
+
+	public void updateTypeInfo(HashMap<Integer,Integer> newInfo){
+
+	}
 }

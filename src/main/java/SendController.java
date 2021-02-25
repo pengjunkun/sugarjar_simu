@@ -11,12 +11,41 @@ public class SendController
 {
 	HashMap<Long, User> userHashMap = new HashMap<>();
 
-	public void readFileAndSent(String fPath)
+	public void readFileAndSent(String requestFile, String typeInfoFile)
 	{
+		//read in the corresponding type info
+		BufferedReader typeReader;
+		HashMap<String, Integer> typeMapping = new HashMap<>();
+
+		try
+		{
+			typeReader = new BufferedReader(new FileReader(typeInfoFile));
+			String oneLine = typeReader.readLine();
+			while (oneLine != null)
+			{
+				if (oneLine.length() == 0)
+				{
+					oneLine = typeReader.readLine();
+					continue;
+				}
+				String[] tmp = oneLine.split(",");
+				typeMapping.put(tmp[0], Integer.parseInt(tmp[1]));
+
+				oneLine = typeReader.readLine();
+			}
+
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 		BufferedReader bufferedReader;
 		try
 		{
-			bufferedReader = new BufferedReader(new FileReader(fPath));
+			bufferedReader = new BufferedReader(new FileReader(requestFile));
 			String oneLine = bufferedReader.readLine();
 			//check the first line
 			if (oneLine.startsWith("user"))
@@ -55,7 +84,8 @@ public class SendController
 					}
 
 				//3.send request
-				user.requestWithoutType(timestamp, vid);
+				//				user.requestWithoutType(timestamp, vid);
+				user.request(timestamp, typeMapping.get(vid), vid);
 
 				oneLine = bufferedReader.readLine();
 			}

@@ -4,6 +4,8 @@ import Edge.EdgeServer;
 import Remote.OriginalServer;
 import tools.MyLog;
 
+import java.util.HashMap;
+
 /**
  * Created by JackPeng(pengjunkun@gmail.com) on 2021/1/29.
  */
@@ -49,7 +51,13 @@ public class User
 		int optimalEdgeId = edgeChooser.getEdge(tid);
 		EdgeServer optimalEdge = OriginalServer.getInstance().getEdge(optimalEdgeId);
 		//2. use this edge to request
-		return optimalEdge.getContent(timestamp, tid, vid);
+		int latency= optimalEdge.getContent(timestamp, tid, vid);
+		//3. everytime, user send a request to get video. He can get the edges' type info at the same time
+		HashMap<Integer,Integer> edgeTypeInfo=optimalEdge.getCacheTypeInfo();
+		//todo:update
+
+
+		return latency;
 
 	}
 
