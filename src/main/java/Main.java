@@ -15,10 +15,7 @@ public class Main
 	public static void main(String[] args){
 		MyLog.jack("write");
 		sendController=new SendController();
-		//in PengCheng
-//		sendController.readFileAndSent("C:\\Users\\HP\\work\\project\\SugarJar\\simu\\data\\54.csv");
-		//in Tsinghua
-		sendController.readFileAndSent("C:\\Users\\lenovo\\work\\project\\sugarJar\\simu\\data\\54.csv");
+		sendController.readFileAndSent("C:\\work\\data\\iqiyi\\24h.csv");
 
 		
 	}

@@ -1,8 +1,29 @@
 Eid:1
-Total request:4064621
-Hit request:837146
-Hit ratio:0.20595917798978058
+Total request:155490
+Hit request:34435
+Hit ratio:0.22146118721461186
+----------------
+Eid:2
+Total request:1116345
+Hit request:216938
+Hit ratio:0.19432881412108263
+----------------
+Eid:3
+Total request:642873
+Hit request:123549
+Hit ratio:0.19218259282937689
+----------------
+Eid:4
+Total request:358439
+Hit request:70515
+Hit ratio:0.19672803461676883
+----------------
+Eid:5
+Total request:1287647
+Hit request:266826
+Hit ratio:0.20721983587116655
 ----------------
 ----------------total----------------
-Total request:4064621
-Hit request:837146
+Total request:3560794
+Hit request:712263
+Hit ratio:0.20002926313625558
