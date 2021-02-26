@@ -1,3 +1,4 @@
+import Client.EdgeChooser;
 import Client.User;
 import Remote.OriginalServer;
 
@@ -84,8 +85,10 @@ public class SendController
 					}
 
 				//3.send request
-				//				user.requestWithoutType(timestamp, vid);
+//								user.requestWithoutType(timestamp, vid);
 				user.request(timestamp, typeMapping.get(vid), vid);
+				//try with random type
+//				user.request(timestamp, (int) (Long.parseLong(vid)%200), vid);
 
 				oneLine = bufferedReader.readLine();
 			}
@@ -99,6 +102,8 @@ public class SendController
 		}
 
 		OriginalServer.getInstance().reportAllStat();
+
+		System.out.println("all updated:"+ EdgeChooser.count+"times!");
 
 	}
 }

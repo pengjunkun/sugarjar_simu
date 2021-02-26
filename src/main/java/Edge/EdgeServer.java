@@ -85,7 +85,7 @@ public class EdgeServer {
             if (preTid != MyConf.NOT_REPLACEMENT) {
                 //minus old type info
                 cacheTypeInfo.put(preTid,
-                        cacheTypeInfo.getOrDefault(tid, 0) - MyConf.FILE_SIZE);
+                        cacheTypeInfo.getOrDefault(preTid, 0) - MyConf.FILE_SIZE);
             }
 
             //add new added type info

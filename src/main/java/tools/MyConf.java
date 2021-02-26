@@ -13,7 +13,7 @@ public class MyConf
 	public static final int MISS_LATENCY = 500;
 	//MiB
 	public static final int FILE_SIZE = 1;
-	public static final int UPDATE_THRESHOLD = 10;
+	public static final int UPDATE_THRESHOLD = 3;
 	//-1 means all in one type, without class info
 	public static int[] types = new int[202];
 	static {

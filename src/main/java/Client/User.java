@@ -25,7 +25,8 @@ public class User
 		this.lat = lat;
 		this.lon = lon;
 		//create a EdgeChooser for this user
-		edgeChooser = new EdgeChooser(lat, lon);
+//		edgeChooser = new EdgeChooser(lat, lon);
+				edgeChooser = EdgeChooser.getInstance();
 	}
 
 	public int request(long timestamp, int tid, int vid)

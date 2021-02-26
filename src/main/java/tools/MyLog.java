@@ -57,6 +57,7 @@ public class MyLog
 		try
 		{
 			tagWriter = new BufferedWriter(new FileWriter("result/"+MYTAG + ".txt"));
+//			tagWriter = new BufferedWriter(new FileWriter("/home/pengjk/result/"+MYTAG + ".txt"));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
