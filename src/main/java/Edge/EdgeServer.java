@@ -22,6 +22,9 @@ public class EdgeServer {
     private long hitRequest;
     private long missRequest;
 
+    //for now, treated all the edges as each other's neighbor
+    private HashMap<Integer,NeighborEdgeInfo> neighbors;
+
     public EdgeServer(int id, double lat, double lon, int size) {
         this.id = id;
         this.lat = lat;
@@ -29,6 +32,18 @@ public class EdgeServer {
         this.size = size;
         lruCache = new LRUCache(size);
         cacheTypeInfo = new HashMap<>();
+        neighbors=new HashMap<>();
+
+        for (String[] edge : MyConf.edgesInfo)
+        {
+            int nid = Integer.parseInt(edge[0]);
+            double nlat = Double.parseDouble(edge[1]);
+            double nlon = Double.parseDouble(edge[2]);
+            //for simulation, suppose ip is fixed
+            String ip="0";
+            int latency=100;
+            neighbors.put(nid, new NeighborEdgeInfo(nid,ip,latency,nlat,nlon));
+        }
     }
 
     public int getEid() {
@@ -89,6 +104,10 @@ public class EdgeServer {
         return cacheTypeInfo;
     }
 
+    public HashMap<Integer,NeighborEdgeInfo> getNeighbors(){
+        return neighbors;
+    }
+
     /**
      * this is the admission hook for a Cache Algorithm
      *
@@ -127,4 +146,5 @@ public class EdgeServer {
     public int getAllContentSize() {
         return lruCache.size();
     }
+
 }

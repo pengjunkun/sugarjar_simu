@@ -1,5 +1,6 @@
 package Client;
 
+import Edge.NeighborEdgeInfo;
 import Remote.OriginalServer;
 import tools.MyConf;
 
@@ -13,11 +14,13 @@ import java.util.HashMap;
 public class EdgeChooser
 {
 	private HashMap<Integer, Integer> type2edgeId_hashMap;
+	private HashMap<Integer, Integer> type2capacity_hashMap;
 	private int defaultEdgeId = -1;
 
 	public EdgeChooser(double lat, double log)
 	{
 		type2edgeId_hashMap = new HashMap<>();
+		type2capacity_hashMap=new HashMap<>();
 		addDefaultChoice(lat, log);
 	}
 
@@ -28,6 +31,8 @@ public class EdgeChooser
 		for (int type : MyConf.types)
 		{
 			type2edgeId_hashMap.put(type, defaultEdge);
+			//when user get default edge, he doesn't know the edge's info
+			type2capacity_hashMap.put(type,0);
 		}
 	}
 
@@ -35,7 +40,6 @@ public class EdgeChooser
 	{
 		type2edgeId_hashMap.clear();
 		addDefaultChoice(lat, lon);
-
 	}
 
 	public int getEdge(int tid)
@@ -48,7 +52,33 @@ public class EdgeChooser
 		return defaultEdgeId;
 	}
 
-	public void updateTypeInfo(HashMap<Integer,Integer> newInfo){
+	public void updateTypeInfo(int eid,HashMap<Integer,Integer> typeInfo){
+		//compare each capacity with current
+		for (int typeId:typeInfo.keySet())
+		{
+			int tmp=typeInfo.get(typeId);
+			if (tmp>type2capacity_hashMap.get(typeId)){
+				type2edgeId_hashMap.put(typeId,eid);
+				type2capacity_hashMap.put(typeId,tmp);
+			}
+
+		}
+	}
+	public void updateEdgeCandidates(HashMap<Integer, NeighborEdgeInfo> candidates){
+		//todo
+
+
+	}
+
+	public void updateAllTypeInfo()
+	{
+		//for now, we think every user main all the edges info
+		for (String[] edge : MyConf.edgesInfo)
+		{
+			int eid = Integer.parseInt(edge[0]);
+			HashMap typeInfo=OriginalServer.getInstance().getEdge(eid).getCacheTypeInfo();
+			updateTypeInfo(eid,typeInfo);
+		}
 
 	}
 }

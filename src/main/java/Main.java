@@ -15,6 +15,7 @@ public class Main
 	public static void main(String[] args){
 		MyLog.jack("write");
 		sendController=new SendController();
+//		sendController.readFileAndSent("C:\\work\\data\\iqiyi\\24h.csv","C:\\work\\data\\iqiyi\\typeResult\\out_24h.csv");
 		sendController.readFileAndSent("C:\\work\\data\\iqiyi\\24h.csv");
 
 		

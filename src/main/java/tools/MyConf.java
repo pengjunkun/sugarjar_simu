@@ -13,8 +13,14 @@ public class MyConf
 	public static final int MISS_LATENCY = 500;
 	//MiB
 	public static final int FILE_SIZE = 1;
+	public static final int UPDATE_THRESHOLD = 10;
 	//-1 means all in one type, without class info
-	public static int[] types = { -1, 0, 1, 2, 3, 4, 5, 6, 7 };
+	public static int[] types = new int[202];
+	static {
+		for (int i =-1;i<201;i++){
+			types[i+1]=i;
+		}
+	}
 
 	//edges:{id,latitude,longitude,size(MiB)}
 	//    public static String[][] edgesInfo = { {"1", "40.1", "116.1", "108"}};
