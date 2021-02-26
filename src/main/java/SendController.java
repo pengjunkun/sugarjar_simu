@@ -104,6 +104,9 @@ public class SendController
 		OriginalServer.getInstance().reportAllStat();
 
 		System.out.println("all updated:"+ EdgeChooser.count+"times!");
+		//todo: 1.make code clean
+		//2. try different hours
+		//3. check the result capacity of each edge
 
 	}
 }
