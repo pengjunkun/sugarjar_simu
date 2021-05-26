@@ -19,20 +19,11 @@ public class EdgeChooser
 	private HashMap<Integer, Integer> type2capacity_hashMap;
 	private int defaultEdgeId = -1;
 
-	private EdgeChooser(double lat, double log)
+	public EdgeChooser(double lat, double lon)
 	{
 		type2edgeId_hashMap = new HashMap<>();
 		type2capacity_hashMap = new HashMap<>();
-		addDefaultChoice(lat, log);
-	}
-
-	public static EdgeChooser getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new EdgeChooser(39.0, 116.0);
-		}
-		return instance;
+		addDefaultChoice(lat, lon);
 	}
 
 	private void addDefaultChoice(double lat, double lon)

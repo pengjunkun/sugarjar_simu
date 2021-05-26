@@ -25,8 +25,7 @@ public class User
 		this.lat = lat;
 		this.lon = lon;
 		//create a EdgeChooser for this user
-//		edgeChooser = new EdgeChooser(lat, lon);
-				edgeChooser = EdgeChooser.getInstance();
+		edgeChooser = new EdgeChooser(lat, lon);
 	}
 
 	public int request(long timestamp, int tid, int vid)
@@ -57,15 +56,11 @@ public class User
 		//2. use this edge to request
 		int latency= optimalEdge.getContent(timestamp, tid, vid);
 		//3. everytime, user send a request to get video. He can get the edges' type info at the same time
-//		HashMap<Integer,Integer> edgeTypeInfo=optimalEdge.getCacheTypeInfo();
+		HashMap<Integer,Integer> edgeTypeInfo=optimalEdge.getCacheTypeInfo();
 //		HashMap<Integer, NeighborEdgeInfo> neighbors=optimalEdge.getNeighbors();
 		//update edges first then
 //		edgeChooser.updateEdgeCandidates(neighbors);
-//		edgeChooser.updateTypeInfo(edgeTypeInfo);
-		//3. for now, update type info in a fixed frequency
-		if (++updateCount> MyConf.UPDATE_THRESHOLD){
-			edgeChooser.updateAllTypeInfo();
-		}
+		edgeChooser.updateTypeInfo(optimalEdgeId,edgeTypeInfo);
 
 		return latency;
 

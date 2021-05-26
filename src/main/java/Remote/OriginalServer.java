@@ -107,6 +107,7 @@ public class OriginalServer
 			MyLog.tagWriter("Total request:" + tmp[0]);
 			MyLog.tagWriter("Hit request:" + tmp[1]);
 			MyLog.tagWriter("Hit ratio:" + ratio);
+			MyLog.tagWriter("categories:" + edge.getCacheTypeInfo().values());
 			MyLog.tagWriter("----------------");
 		}
 		MyLog.tagWriter("----------------total----------------");

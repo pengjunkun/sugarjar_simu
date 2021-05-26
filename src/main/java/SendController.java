@@ -1,12 +1,14 @@
 import Client.EdgeChooser;
 import Client.User;
 import Remote.OriginalServer;
+import tools.MyConf;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Random;
 
 public class SendController
 {
@@ -17,7 +19,6 @@ public class SendController
 		//read in the corresponding type info
 		BufferedReader typeReader;
 		HashMap<String, Integer> typeMapping = new HashMap<>();
-
 		try
 		{
 			typeReader = new BufferedReader(new FileReader(typeInfoFile));
@@ -29,7 +30,7 @@ public class SendController
 					oneLine = typeReader.readLine();
 					continue;
 				}
-				String[] tmp = oneLine.split(",");
+				String[] tmp = oneLine.split(":");
 				typeMapping.put(tmp[0], Integer.parseInt(tmp[1]));
 
 				oneLine = typeReader.readLine();
@@ -55,7 +56,6 @@ public class SendController
 			}
 			while (oneLine != null)
 			{
-
 				if (oneLine.length() == 0)
 				{
 					oneLine = bufferedReader.readLine();
@@ -66,8 +66,6 @@ public class SendController
 				long timestamp = Long.parseLong(tmp[1]);
 				double lon = Double.parseDouble(tmp[2]);
 				double lat = Double.parseDouble(tmp[3]);
-				//Todo: get the type in future
-				int tid = 0;
 				String vid = oneLine.split(",")[4];
 
 				//1.find the user
@@ -86,9 +84,8 @@ public class SendController
 
 				//3.send request
 //								user.requestWithoutType(timestamp, vid);
-				user.request(timestamp, typeMapping.get(vid), vid);
-				//try with random type
-//				user.request(timestamp, (int) (Long.parseLong(vid)%200), vid);
+				int tid=typeMapping.get(vid)!=null?typeMapping.get(vid): new Random().nextInt(MyConf.typeNum);
+				user.request(timestamp, tid, vid);
 
 				oneLine = bufferedReader.readLine();
 			}
