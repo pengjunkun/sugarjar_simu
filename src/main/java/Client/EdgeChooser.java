@@ -75,10 +75,8 @@ public class EdgeChooser
 
 	}
 
-	public static int count=0;
 	public void updateAllTypeInfo()
 	{
-		count++;
 		//for now, we think every user main all the edges info
 		for (String[] edge : MyConf.edgesInfo)
 		{

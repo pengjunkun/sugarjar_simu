@@ -60,7 +60,11 @@ public class User
 //		HashMap<Integer, NeighborEdgeInfo> neighbors=optimalEdge.getNeighbors();
 		//update edges first then
 //		edgeChooser.updateEdgeCandidates(neighbors);
+
+		//every time suppose this edgeChoose know all edges' info
 		edgeChooser.updateTypeInfo(optimalEdgeId,edgeTypeInfo);
+//		edgeChooser.updateAllTypeInfo();
+
 
 		return latency;
 

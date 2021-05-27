@@ -107,7 +107,12 @@ public class OriginalServer
 			MyLog.tagWriter("Total request:" + tmp[0]);
 			MyLog.tagWriter("Hit request:" + tmp[1]);
 			MyLog.tagWriter("Hit ratio:" + ratio);
-			MyLog.tagWriter("categories:" + edge.getCacheTypeInfo().values());
+			HashMap<Integer,Integer> typeMap=edge.getCacheTypeInfo();
+			ArrayList<Integer> typeInfo=new ArrayList<>();
+			for(int i=0;i<MyConf.typeNum;i++){
+				typeInfo.add(typeMap.getOrDefault(i,0));
+			}
+			MyLog.tagWriter("categories:" +typeInfo.toString());
 			MyLog.tagWriter("----------------");
 		}
 		MyLog.tagWriter("----------------total----------------");
