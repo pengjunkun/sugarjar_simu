@@ -14,16 +14,8 @@ public class MyConf
 	//MiB
 	public static final int FILE_SIZE = 1;
 	public static final int UPDATE_THRESHOLD = 3;
-	public static final int typeNum = 300;
-	public static int[] types = new int[typeNum];
-
-	static
-	{
-		for (int i = 0; i < typeNum; i++)
-		{
-			types[i] = i;
-		}
-	}
+	public static final String typeFile=".\\res\\nodes10.csv";
+	public static int typeNum = 0;
 
 	private static String[] edgeSize = { "34", "20", "24", "24", "52", "53", "45", "68", "48", "33", "30", "75", "84",
 			"80", "97", "96", "74", "97", "48", "16", "16", "44", "43", "24", "44", "51", "46", "26", "9", "37", "15",

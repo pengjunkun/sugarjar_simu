@@ -6,17 +6,18 @@ package Edge;
 public class NeighborEdgeInfo
 {
 	int id;
-	String ip;
+//	String ip;
 	int latency;
-	double lat;
-	double lon;
+//	double lat;
+//	double lon;
 
-	public NeighborEdgeInfo(int id, String ip, int latency, double lat, double lon)
+//	public NeighborEdgeInfo(int id, String ip, int latency, double lat, double lon)
+	public NeighborEdgeInfo(int id,  int latency)
 	{
 		this.id = id;
-		this.ip = ip;
+//		this.ip = ip;
 		this.latency = latency;
-		this.lat = lat;
-		this.lon = lon;
+//		this.lat = lat;
+//		this.lon = lon;
 	}
 }

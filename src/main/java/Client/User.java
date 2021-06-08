@@ -54,16 +54,12 @@ public class User
 		int optimalEdgeId = edgeChooser.getEdge(tid);
 		EdgeServer optimalEdge = OriginalServer.getInstance().getEdge(optimalEdgeId);
 		//2. use this edge to request
-		int latency= optimalEdge.getContent(timestamp, tid, vid);
+		int latency= optimalEdge.getContent(timestamp, tid, vid,edgeChooser.getDefaultEdgeId());
 		//3. everytime, user send a request to get video. He can get the edges' type info at the same time
-		HashMap<Integer,Integer> edgeTypeInfo=optimalEdge.getCacheTypeInfo();
-//		HashMap<Integer, NeighborEdgeInfo> neighbors=optimalEdge.getNeighbors();
-		//update edges first then
-//		edgeChooser.updateEdgeCandidates(neighbors);
-
-		//every time suppose this edgeChoose know all edges' info
-		edgeChooser.updateTypeInfo(optimalEdgeId,edgeTypeInfo);
+		HashMap<Integer, NeighborEdgeInfo> neighbors=optimalEdge.getNeighbors();
+		edgeChooser.updateEdgeCandidates(neighbors);
 //		edgeChooser.updateAllTypeInfo();
+
 
 
 		return latency;
@@ -74,12 +70,5 @@ public class User
 	public void updateLocation(double lat, double lon)
 	{
 		edgeChooser.updateDefaultChoice(lat,lon);
-	}
-
-	public int requestWithoutType(long timestamp, String vid)
-	{
-		EdgeServer edge = OriginalServer.getInstance().getEdge(edgeChooser.getDefaultEdgeId());
-		return edge.getContentWithoutType(timestamp, vid);
-
 	}
 }

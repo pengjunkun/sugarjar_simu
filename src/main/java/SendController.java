@@ -14,14 +14,15 @@ public class SendController
 {
 	HashMap<Long, User> userHashMap = new HashMap<>();
 
-	public void readFileAndSent(String requestFile, String typeInfoFile)
+	public void readFileAndSent(String requestFile)
 	{
 		//read in the corresponding type info
 		BufferedReader typeReader;
 		HashMap<String, Integer> typeMapping = new HashMap<>();
 		try
 		{
-			typeReader = new BufferedReader(new FileReader(typeInfoFile));
+			int maxTypeId = 0;
+			typeReader = new BufferedReader(new FileReader(MyConf.typeFile));
 			String oneLine = typeReader.readLine();
 			while (oneLine != null)
 			{
@@ -31,10 +32,14 @@ public class SendController
 					continue;
 				}
 				String[] tmp = oneLine.split(":");
-				typeMapping.put(tmp[0], Integer.parseInt(tmp[1]));
-
+				int typeId = Integer.parseInt(tmp[1]);
+				typeMapping.put(tmp[0], typeId);
+				if (typeId > maxTypeId)
+					maxTypeId = typeId;
 				oneLine = typeReader.readLine();
 			}
+			MyConf.typeNum = maxTypeId + 1;
+			System.out.println("typeNum:%d".formatted(MyConf.typeNum));
 
 		} catch (FileNotFoundException e)
 		{
@@ -83,8 +88,8 @@ public class SendController
 					}
 
 				//3.send request
-//								user.requestWithoutType(timestamp, vid);
-				int tid=typeMapping.get(vid)!=null?typeMapping.get(vid): new Random().nextInt(MyConf.typeNum);
+				//								user.requestWithoutType(timestamp, vid);
+				int tid = typeMapping.get(vid) != null ? typeMapping.get(vid) : new Random().nextInt(MyConf.typeNum);
 				user.request(timestamp, tid, vid);
 
 				oneLine = bufferedReader.readLine();

@@ -30,7 +30,7 @@ public class EdgeChooser
 	{
 		int defaultEdge = OriginalServer.getInstance().getEdgeByDistance(lat, lon);
 		this.defaultEdgeId = defaultEdge;
-		for (int type : MyConf.types)
+		for (int type=0;type<MyConf.typeNum;type++)
 		{
 			type2edgeId_hashMap.put(type, defaultEdge);
 			//when user get default edge, he doesn't know the edge's info
@@ -65,13 +65,16 @@ public class EdgeChooser
 				type2edgeId_hashMap.put(typeId, eid);
 				type2capacity_hashMap.put(typeId, tmp);
 			}
-
 		}
 	}
 
 	public void updateEdgeCandidates(HashMap<Integer, NeighborEdgeInfo> candidates)
 	{
-		//todo
+		for (int nid : candidates.keySet())
+		{
+			HashMap<Integer, Integer> edgeTypeInfo = OriginalServer.getInstance().getEdge(nid).getCacheTypeInfo();
+			updateTypeInfo(nid, edgeTypeInfo);
+		}
 
 	}
 

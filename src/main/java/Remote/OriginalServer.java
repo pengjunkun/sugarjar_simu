@@ -6,6 +6,7 @@ import tools.MyLog;
 import tools.MyTool;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -34,6 +35,7 @@ public class OriginalServer
 			double lat = Double.parseDouble(edge[1]);
 			double lon = Double.parseDouble(edge[2]);
 			int size = Integer.parseInt(edge[3]);
+			size*=10;
 			edges.put(id, new EdgeServer(id, lat, lon, size));
 		}
 	}
@@ -113,7 +115,10 @@ public class OriginalServer
 				typeInfo.add(typeMap.getOrDefault(i,0));
 			}
 			MyLog.tagWriter("categories:" +typeInfo.toString());
+			MyLog.tagWriter("fromMEC:" );
+			printSqure(edge.getEid(),edge.fromMEC,edge.fromMEC_hit);
 			MyLog.tagWriter("----------------");
+			MyLog.tagWriter(" ");
 		}
 		MyLog.tagWriter("----------------total----------------");
 		MyLog.tagWriter("Total request:" + totalReq);
@@ -122,5 +127,8 @@ public class OriginalServer
 		MyLog.tagWriter("Hit ratio:" + totalHitRatio);
 		MyLog.closeTagWriter();
 		return new long[] { totalReq, hitReq, missReq };
+	}
+	private void printSqure(int homeMEC,int[] arrays,int[] arrays_hit){
+		MyLog.tagSquareWriter(homeMEC,arrays,arrays_hit);
 	}
 }

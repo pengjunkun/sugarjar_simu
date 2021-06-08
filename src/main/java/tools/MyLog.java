@@ -53,11 +53,11 @@ public class MyLog
 
 	public static void initTagWriter(String str)
 	{
-		MYTAG=str;
+		MYTAG = str;
 		try
 		{
-			tagWriter = new BufferedWriter(new FileWriter("result/"+MYTAG + ".txt"));
-//			tagWriter = new BufferedWriter(new FileWriter("/home/pengjk/result/"+MYTAG + ".txt"));
+			tagWriter = new BufferedWriter(new FileWriter("result/" + MYTAG + ".txt"));
+			//			tagWriter = new BufferedWriter(new FileWriter("/home/pengjk/result/"+MYTAG + ".txt"));
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -77,6 +77,48 @@ public class MyLog
 		}
 	}
 
+	public static void tagSquareWriter(int homeMEC, int[] arrays, int[] arrays_hit)
+	{
+		try
+		{
+			int lineSize = (int) Math.sqrt(arrays.length);
+			for (int a = 0; a < lineSize; a++)
+			{
+				String line = "";
+				for (int b = lineSize * a; b < lineSize * a + lineSize; b++)
+				{
+					String tmp="";
+					if (arrays[b] != 0)
+					{
+						tmp += ("%2$d/%1$d".formatted(arrays[b], arrays_hit[b]));
+					} else
+					{
+						tmp += ("%1$d".formatted(arrays[b]));
+					}
+
+					if (b + 1 == homeMEC)
+						tmp += "H";
+
+					int append = 8 - tmp.length();
+					if (append < 0)
+						append = 0;
+					for (int i = 0; i < append; i++)
+					{
+						tmp += " ";
+					}
+					line+=tmp;
+				}
+				tagWriter.write(line);
+				tagWriter.newLine();
+			}
+		} catch (IOException e)
+
+		{
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void closeTagWriter()
 	{
 		try
@@ -90,7 +132,7 @@ public class MyLog
 
 	public static void jack(String s)
 	{
-				System.out.println(s);
+		System.out.println(s);
 	}
 
 	public static void jackJoint(String s)

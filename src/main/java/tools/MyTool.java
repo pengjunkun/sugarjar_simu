@@ -1,5 +1,7 @@
 package tools;
 
+import java.util.stream.IntStream;
+
 public class MyTool {
 //    'M' is statute miles (default)
 //                  'K' is kilometers
@@ -30,5 +32,13 @@ public class MyTool {
             }
             return (dist);
         }
+    }
+    public static String genMultiString(String oneBlock,int times){
+        StringBuffer result=new StringBuffer();
+        for (int i : IntStream.range(0,times).toArray())
+        {
+            result.append(oneBlock);
+        }
+        return result.toString();
     }
 }
