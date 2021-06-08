@@ -19,6 +19,9 @@ public class EdgeServer {
     public int[] fromMEC_hit=new int[MyConf.edgesInfo.length];
 
     private HashMap<Integer, Integer> cacheTypeInfo;
+    private HashMap<Integer, Integer> oldCacheTypeInfo;
+    private long lastCaheTypeTimestamp=-1;
+    private int cacheTypeInfoUpdate_period=1*60;
     // in LRUCache <vid,tid>
     private LRUCache lruCache;
     private long totalRequest;
@@ -114,6 +117,11 @@ public class EdgeServer {
                     MyConf.FILE_SIZE + cacheTypeInfo.getOrDefault(tid, 0));
         }
 
+        if (timestamp-lastCaheTypeTimestamp>cacheTypeInfoUpdate_period){
+            oldCacheTypeInfo=cacheTypeInfo;
+            lastCaheTypeTimestamp=timestamp;
+        }
+
         return MyConf.MISS_LATENCY;
     }
 
@@ -123,6 +131,10 @@ public class EdgeServer {
 
     public HashMap getCacheTypeInfo() {
         return cacheTypeInfo;
+    }
+
+    public HashMap getOldCacheTypeInfo() {
+        return oldCacheTypeInfo;
     }
 
     public HashMap<Integer,NeighborEdgeInfo> getNeighbors(){

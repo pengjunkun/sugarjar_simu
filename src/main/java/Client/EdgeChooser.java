@@ -72,7 +72,7 @@ public class EdgeChooser
 	{
 		for (int nid : candidates.keySet())
 		{
-			HashMap<Integer, Integer> edgeTypeInfo = OriginalServer.getInstance().getEdge(nid).getCacheTypeInfo();
+			HashMap<Integer, Integer> edgeTypeInfo = OriginalServer.getInstance().getEdge(nid).getOldCacheTypeInfo();
 			updateTypeInfo(nid, edgeTypeInfo);
 		}
 
